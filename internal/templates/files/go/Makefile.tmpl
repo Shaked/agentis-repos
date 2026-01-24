@@ -1,0 +1,22 @@
+.PHONY: build test lint fmt clean
+
+# Build the binary
+build:
+	go build -o bin/app ./...
+
+# Run all tests with race detection
+test:
+	go test -v -race ./...
+
+# Run linter
+lint:
+	golangci-lint run
+
+# Format code
+fmt:
+	gofmt -w .
+	goimports -w .
+
+# Clean build artifacts
+clean:
+	rm -rf bin/

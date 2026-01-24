@@ -1,0 +1,63 @@
+# Testing Standards
+
+## Framework
+- **pytest** (unittest is NOT allowed)
+- pytest-asyncio for async tests
+- pytest-mock for mocking
+
+## Test File Naming
+- Test files: `test_*.py` or `*_test.py`
+- Test functions: `test_*`
+
+## Test Structure
+
+```python
+import pytest
+
+class TestUserService:
+    """Tests for UserService."""
+
+    def test_create_user_success(self):
+        """Test successful user creation."""
+        service = UserService()
+        user = service.create("alice@example.com")
+        assert user.email == "alice@example.com"
+
+    def test_create_user_invalid_email(self):
+        """Test user creation with invalid email."""
+        service = UserService()
+        with pytest.raises(ValueError):
+            service.create("invalid-email")
+
+    @pytest.mark.parametrize("email,expected", [
+        ("alice@example.com", True),
+        ("bob@test.org", True),
+        ("invalid", False),
+    ])
+    def test_validate_email(self, email, expected):
+        """Test email validation with various inputs."""
+        assert validate_email(email) == expected
+```
+
+## Async Tests
+
+```python
+import pytest
+
+@pytest.mark.asyncio
+async def test_async_operation():
+    result = await fetch_data()
+    assert result is not None
+```
+
+## Test Commands
+```bash
+uv run pytest                    # Run all tests
+uv run pytest -v                 # Verbose
+uv run pytest -k "test_name"     # Run specific test
+uv run pytest --cov=src          # With coverage
+```
+
+## Fixtures
+- Define in `conftest.py`
+- Use scope appropriately (function, class, module, session)

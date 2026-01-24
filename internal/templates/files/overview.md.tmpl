@@ -1,0 +1,18 @@
+# Monorepo Architecture Overview
+
+## Projects
+{{range .Results}}
+### {{.Path}}
+- **Stack**: {{.Stack}}
+- **Context**: `{{.Path}}/.agent/`
+{{end}}
+
+## Shared Resources
+- Root `.agentignore` applies to all projects
+- Root `.pre-commit-config.yaml` runs checks on all projects
+- Root `Makefile` provides cross-project commands
+
+## Navigation
+- Each project has its own `AGENTS.md` and `.agent/` directory
+- Read the relevant project's context before making changes
+- Use root-level commands for cross-project operations

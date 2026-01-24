@@ -1,0 +1,75 @@
+# Code Review Rules
+
+> Code review requirements for Go projects.
+
+## Reviewer Skills Required
+
+- Understand Go idioms and best practices
+- Verify changes follow established conventions
+- Identify security vulnerabilities and anti-patterns
+- Assess test coverage and quality
+- Evaluate performance implications
+
+## Review Checklist
+
+### Universal Requirements
+
+- [ ] No secrets, credentials, or API keys committed
+- [ ] Error handling is present and appropriate
+- [ ] Tests cover the changes adequately
+- [ ] No commented-out code without explanation
+- [ ] No TODO/FIXME without associated tracking
+- [ ] Changes are backwards compatible (or breaking changes documented)
+
+### Go Style & Formatting
+
+- [ ] Code passes `gofmt` and `goimports`
+- [ ] Code passes `golangci-lint`
+- [ ] Exported identifiers have doc comments
+- [ ] Package names are lowercase, single-word
+- [ ] Receiver names are short and consistent
+- [ ] Error messages start with lowercase
+- [ ] Acronyms in names use consistent casing (URL, HTTP, ID)
+
+### Go Security Patterns
+
+- [ ] No `unsafe` package without justification
+- [ ] SQL queries use parameterized statements
+- [ ] HTTP handlers validate input
+- [ ] Sensitive data not logged
+- [ ] Cryptographic operations use `crypto/*` packages
+- [ ] No hardcoded credentials or secrets
+
+### Go Performance Considerations
+
+- [ ] Avoid unnecessary allocations in hot paths
+- [ ] Use `sync.Pool` for frequently allocated objects
+- [ ] Preallocate slices when size is known
+- [ ] Avoid string concatenation in loops (use `strings.Builder`)
+- [ ] Context cancellation properly handled
+- [ ] Goroutine leaks prevented (defer cleanup, channel closing)
+
+### Go Testing Requirements
+
+- [ ] Table-driven tests for multiple cases
+- [ ] Test names follow `Test<Function>_<Scenario>` pattern
+- [ ] Error conditions tested
+- [ ] Subtests used for related scenarios
+- [ ] Mocks/fakes follow interface patterns
+- [ ] Benchmarks for performance-critical code
+
+### Go Architecture
+
+- [ ] Small interfaces (1-3 methods preferred)
+- [ ] Accept interfaces, return structs
+- [ ] Errors wrapped with context (`fmt.Errorf("...: %w", err)`)
+- [ ] Package boundaries are clear
+- [ ] No circular dependencies
+- [ ] Context passed as first parameter
+
+### Go Documentation
+
+- [ ] Package doc comment in `doc.go` or main file
+- [ ] Exported functions have doc comments
+- [ ] Examples provided for complex APIs
+- [ ] README documents CLI flags and usage

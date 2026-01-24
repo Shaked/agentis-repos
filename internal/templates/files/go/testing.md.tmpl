@@ -1,0 +1,53 @@
+# Testing Standards
+
+## Framework
+- Standard `testing` package
+- **Table-driven tests** are mandatory
+
+## Test File Naming
+- Test files: `*_test.go`
+- Same package as code being tested
+
+## Table-Driven Test Pattern
+
+```go
+func TestExample(t *testing.T) {
+    tests := []struct {
+        name     string
+        input    string
+        expected string
+    }{
+        {
+            name:     "basic case",
+            input:    "hello",
+            expected: "HELLO",
+        },
+        {
+            name:     "empty string",
+            input:    "",
+            expected: "",
+        },
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            result := Transform(tt.input)
+            if result != tt.expected {
+                t.Errorf("got %v, want %v", result, tt.expected)
+            }
+        })
+    }
+}
+```
+
+## Test Commands
+```bash
+go test ./...           # Run all tests
+go test -race ./...     # With race detection
+go test -v ./...        # Verbose output
+go test -cover ./...    # With coverage
+```
+
+## Assertions
+- Use standard `t.Errorf` / `t.Fatalf`
+- Or `github.com/stretchr/testify/assert` for convenience

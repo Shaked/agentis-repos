@@ -1,0 +1,77 @@
+# Code Review Rules
+
+> Code review requirements for Node.js/TypeScript projects.
+
+## Reviewer Skills Required
+
+- Understand JavaScript/TypeScript idioms
+- Verify changes follow established conventions
+- Identify security vulnerabilities and anti-patterns
+- Assess test coverage and quality
+- Evaluate performance implications
+
+## Review Checklist
+
+### Universal Requirements
+
+- [ ] No secrets, credentials, or API keys committed
+- [ ] Error handling is present and appropriate
+- [ ] Tests cover the changes adequately
+- [ ] No commented-out code without explanation
+- [ ] No TODO/FIXME without associated tracking
+- [ ] Changes are backwards compatible (or breaking changes documented)
+
+### TypeScript/JavaScript Style & Formatting
+
+- [ ] Code passes ESLint
+- [ ] Code formatted with Prettier
+- [ ] TypeScript strict mode enabled
+- [ ] No `any` types without justification
+- [ ] Consistent naming (camelCase functions, PascalCase classes)
+- [ ] No unused imports or variables
+- [ ] Prefer `const` over `let`, avoid `var`
+
+### Node Security Patterns
+
+- [ ] No `eval()` or `new Function()` with user input
+- [ ] SQL/NoSQL queries use parameterized statements
+- [ ] User input validated and sanitized
+- [ ] No prototype pollution vulnerabilities
+- [ ] Dependencies from trusted sources (npm audit clean)
+- [ ] Environment variables for configuration
+- [ ] No secrets in code or git history
+
+### Node Performance Considerations
+
+- [ ] Async/await over nested callbacks
+- [ ] No synchronous I/O in request handlers
+- [ ] Stream processing for large data
+- [ ] Connection pooling for databases
+- [ ] Memory leaks avoided (event listeners cleaned up)
+- [ ] Proper error handling in async code
+
+### Node Testing Requirements
+
+- [ ] Tests use Jest, Vitest, or Mocha
+- [ ] Unit tests for business logic
+- [ ] Integration tests for API endpoints
+- [ ] Mocks for external services
+- [ ] Test coverage meets threshold
+- [ ] Async tests handle promises correctly
+
+### TypeScript Architecture
+
+- [ ] Interfaces for data shapes
+- [ ] Enums or const objects for constants
+- [ ] No circular dependencies
+- [ ] Barrel exports used sparingly
+- [ ] Dependency injection where appropriate
+- [ ] Error types defined and used consistently
+
+### Documentation
+
+- [ ] JSDoc comments on public APIs
+- [ ] README documents setup and usage
+- [ ] API documentation (OpenAPI/Swagger if REST)
+- [ ] Type definitions exported for library consumers
+- [ ] Changelog updated for releases

@@ -1,0 +1,65 @@
+# Code Review Rules
+
+> Code review requirements for CI/CD automation and human reviewers.
+
+## Reviewer Skills Required
+
+- Understand the codebase architecture and patterns
+- Verify changes follow established conventions
+- Identify security vulnerabilities and anti-patterns
+- Assess test coverage and quality
+- Evaluate performance implications
+
+## Review Checklist
+
+### Universal Requirements
+
+- [ ] No secrets, credentials, or API keys committed
+- [ ] Error handling is present and appropriate
+- [ ] Tests cover the changes adequately
+- [ ] No commented-out code without explanation
+- [ ] No TODO/FIXME without associated tracking
+- [ ] Changes are backwards compatible (or breaking changes documented)
+
+### Style & Formatting
+
+- [ ] Code follows project linting rules
+- [ ] Naming conventions are consistent
+- [ ] File organization matches project structure
+- [ ] No unnecessary whitespace changes
+
+### Security Patterns
+
+- [ ] Input validation present at boundaries
+- [ ] No hardcoded sensitive values
+- [ ] Authentication/authorization properly enforced
+- [ ] SQL/injection vulnerabilities addressed
+- [ ] Dependencies are from trusted sources
+
+### Performance Considerations
+
+- [ ] No obvious N+1 queries or inefficient loops
+- [ ] Resource cleanup (connections, files, memory)
+- [ ] Appropriate caching where beneficial
+- [ ] No blocking operations in hot paths
+
+### Testing Requirements
+
+- [ ] Unit tests for new logic
+- [ ] Integration tests for new endpoints/interfaces
+- [ ] Edge cases and error conditions covered
+- [ ] Test names describe the scenario
+
+### Architecture
+
+- [ ] Changes align with existing patterns
+- [ ] No circular dependencies introduced
+- [ ] Separation of concerns maintained
+- [ ] Interfaces used where appropriate
+
+### Documentation
+
+- [ ] Public APIs documented
+- [ ] Complex logic has explanatory comments
+- [ ] README updated if behavior changes
+- [ ] Changelog entry if user-facing

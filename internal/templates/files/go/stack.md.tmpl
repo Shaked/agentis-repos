@@ -1,0 +1,23 @@
+# Technology Stack
+
+## Language & Runtime
+- **Go**: 1.22+
+- **Module**: (see go.mod)
+
+## Tooling
+| Tool | Version | Purpose |
+|------|---------|---------|
+| golangci-lint | 1.62+ | Linting (aggregates multiple linters) |
+| gofmt | (bundled) | Code formatting |
+| goimports | latest | Import management |
+| pre-commit | 4.0+ | Git hook management |
+
+## Project Layout
+```
+cmd/           — Application entry points
+internal/      — Private application code
+pkg/           — Public library code (if any)
+```
+
+## Build Output
+- Binary: `bin/`

@@ -1,0 +1,26 @@
+{
+  "context_files": [
+    ".agent/stack.md",
+    ".agent/testing.md",
+    ".agent/commands.md",
+    ".agent/architecture.md"
+  ],
+  "project_type": "{{.Stack}}",
+  "conventions": {
+{{if eq .Stack.String "go"}}    "testing": "table-driven",
+    "linter": "golangci-lint",
+    "formatter": "gofmt"
+{{else if eq .Stack.String "python"}}    "testing": "pytest",
+    "linter": "ruff",
+    "formatter": "ruff"
+{{else if eq .Stack.String "node"}}    "testing": "vitest",
+    "linter": "eslint",
+    "formatter": "prettier"
+{{else if eq .Stack.String "java"}}    "testing": "junit5",
+    "linter": "checkstyle",
+    "formatter": "spotless"
+{{else}}    "testing": "default",
+    "linter": "default",
+    "formatter": "default"
+{{end}}  }
+}

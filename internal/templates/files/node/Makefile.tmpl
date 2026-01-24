@@ -1,0 +1,25 @@
+.PHONY: install build test lint fmt clean
+
+# Install dependencies
+install:
+	pnpm install
+
+# Build project
+build:
+	pnpm build
+
+# Run tests
+test:
+	pnpm test
+
+# Run linter
+lint:
+	pnpm lint
+
+# Format code
+fmt:
+	pnpm format
+
+# Clean artifacts
+clean:
+	rm -rf dist node_modules .turbo

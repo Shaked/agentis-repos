@@ -1,0 +1,36 @@
+# Cursor Rules - Agent Context
+
+Read these files for repository context before making changes:
+
+## Required Context
+- `.agent/stack.md` — Technology stack, versions, project layout
+- `.agent/testing.md` — Testing patterns and requirements
+- `.agent/commands.md` — CLI commands for build, test, lint
+- `.agent/architecture.md` — System architecture and design decisions
+
+## Quick Reference
+{{if eq .Stack.String "go"}}- Language: Go 1.22+
+- Linter: golangci-lint
+- Formatter: gofmt
+- Test pattern: Table-driven tests
+{{else if eq .Stack.String "python"}}- Language: Python 3.11+
+- Package manager: uv
+- Linter: ruff
+- Formatter: ruff
+- Test framework: pytest
+{{else if eq .Stack.String "node"}}- Language: TypeScript
+- Package manager: pnpm
+- Linter: eslint
+- Formatter: prettier
+- Test framework: vitest
+{{else if eq .Stack.String "java"}}- Language: Java 17+
+- Build: Maven
+- Linter: Checkstyle
+- Formatter: Spotless
+- Test framework: JUnit 5
+{{end}}
+
+## Code Style
+- Follow project conventions in `.agent/stack.md`
+- Run linter before committing
+- Write tests for new functionality

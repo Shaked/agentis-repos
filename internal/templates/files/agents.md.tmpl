@@ -1,0 +1,41 @@
+# Agent Context Router
+
+> {{if eq .Stack.String "go"}}Go{{else if eq .Stack.String "python"}}Python{{else if eq .Stack.String "node"}}Node.js/TypeScript{{else if eq .Stack.String "java"}}Java{{else}}Unknown{{end}} project.
+
+## Development Workflow
+
+When making changes, follow this iterative loop:
+
+1. **Run pre-commit hooks**: `pre-commit run --all-files`
+2. **Run tests**: {{if eq .Stack.String "go"}}`make test`{{else if eq .Stack.String "python"}}`make test`{{else if eq .Stack.String "node"}}`pnpm test`{{else if eq .Stack.String "java"}}`./mvnw test`{{else}}`make test`{{end}}
+3. **Create todos** for any failures or issues found
+4. **Fix** issues one at a time
+5. **Repeat** steps 1-4 until all checks pass
+
+## Context Files
+
+| File | Purpose | When to Read |
+|------|---------|--------------|
+| `CODE_REVIEW_RULES.md` | Code review requirements | Before submitting changes |
+| `repo-best-practices.md` | Team patterns & conventions | When writing new code |
+| `.agent/stack.md` | Tech stack details | Understanding dependencies |
+| `.agent/testing.md` | Testing patterns | Writing/fixing tests |
+| `.agent/commands.md` | CLI commands | Running builds/tests |
+| `.agent/architecture.md` | System architecture | Understanding system design |
+{{if .HasLegacy}}| `.agent/AGENTS_LEGACY.md` | Historical context | If referenced elsewhere |
+{{end}}
+## Quick Reference
+
+{{if eq .Stack.String "go"}}- **Build**: `make build`
+- **Test**: `make test`
+- **Lint**: `make lint`{{else if eq .Stack.String "python"}}- **Install**: `make install`
+- **Test**: `make test`
+- **Lint**: `make lint`{{else if eq .Stack.String "node"}}- **Install**: `pnpm install`
+- **Test**: `pnpm test`
+- **Lint**: `pnpm lint`{{else if eq .Stack.String "java"}}- **Build**: `./mvnw package`
+- **Test**: `./mvnw test`
+- **Lint**: `./mvnw checkstyle:check`{{else}}- See `.agent/commands.md` for available commands{{end}}
+
+## Human Docs
+
+See `USAGE.md` for detailed usage instructions.

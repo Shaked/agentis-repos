@@ -1,0 +1,27 @@
+.PHONY: install test lint fmt clean type-check
+
+# Install dependencies
+install:
+	uv sync
+
+# Run tests
+test:
+	uv run pytest
+
+# Run linter
+lint:
+	uv run ruff check .
+
+# Format code
+fmt:
+	uv run ruff format .
+	uv run ruff check --fix .
+
+# Type checking
+type-check:
+	uv run ty check .
+
+# Clean artifacts
+clean:
+	rm -rf .pytest_cache __pycache__ .ruff_cache .coverage htmlcov
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true

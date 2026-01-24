@@ -1,0 +1,79 @@
+# Code Review Rules
+
+> Code review requirements for Java projects.
+
+## Reviewer Skills Required
+
+- Understand Java idioms and design patterns
+- Verify changes follow established conventions
+- Identify security vulnerabilities and anti-patterns
+- Assess test coverage and quality
+- Evaluate performance implications
+
+## Review Checklist
+
+### Universal Requirements
+
+- [ ] No secrets, credentials, or API keys committed
+- [ ] Error handling is present and appropriate
+- [ ] Tests cover the changes adequately
+- [ ] No commented-out code without explanation
+- [ ] No TODO/FIXME without associated tracking
+- [ ] Changes are backwards compatible (or breaking changes documented)
+
+### Java Style & Formatting
+
+- [ ] Code passes Checkstyle
+- [ ] Code formatted consistently (Google Java Format or project standard)
+- [ ] No wildcard imports
+- [ ] Classes, methods, and fields have appropriate visibility
+- [ ] Naming follows conventions (camelCase methods, PascalCase classes)
+- [ ] No magic numbers (use constants)
+- [ ] Annotations on separate lines
+
+### Java Security Patterns
+
+- [ ] SQL queries use PreparedStatement
+- [ ] No deserialization of untrusted data
+- [ ] Input validation at API boundaries
+- [ ] Sensitive data not logged
+- [ ] Secure random for cryptographic operations
+- [ ] No hardcoded credentials
+- [ ] Dependencies scanned for vulnerabilities
+
+### Java Performance Considerations
+
+- [ ] StringBuilder for string concatenation in loops
+- [ ] Appropriate collection types (ArrayList vs LinkedList)
+- [ ] Streams used judiciously (not for simple loops)
+- [ ] Resources closed properly (try-with-resources)
+- [ ] Connection pooling for databases
+- [ ] Avoid unnecessary object creation
+- [ ] Consider immutability for thread safety
+
+### Java Testing Requirements
+
+- [ ] JUnit 5 for unit tests
+- [ ] Test names describe behavior
+- [ ] Mockito for mocking dependencies
+- [ ] Integration tests for external interactions
+- [ ] Exception scenarios tested
+- [ ] Test coverage meets threshold
+
+### Java Architecture
+
+- [ ] SOLID principles followed
+- [ ] Dependency injection used
+- [ ] Interfaces for service contracts
+- [ ] No circular package dependencies
+- [ ] Appropriate use of design patterns
+- [ ] Lombok used consistently (or not at all)
+- [ ] Optional instead of null for optional values
+
+### Java Documentation
+
+- [ ] Javadoc on public classes and methods
+- [ ] Package-info.java for package documentation
+- [ ] README documents build and run
+- [ ] API documentation (OpenAPI if REST)
+- [ ] Complex algorithms explained in comments

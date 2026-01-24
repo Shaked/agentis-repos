@@ -1,0 +1,48 @@
+# CLI Commands Cheat Sheet
+
+## Build & Run
+```bash
+./mvnw package              # Build JAR
+./mvnw package -DskipTests  # Build without tests
+./mvnw spring-boot:run      # Run (Spring Boot)
+java -jar target/*.jar      # Run JAR
+```
+
+## Testing
+```bash
+./mvnw test                 # Run all tests
+./mvnw test -Dtest=Class    # Run specific class
+./mvnw verify               # Run integration tests
+./mvnw jacoco:report        # Generate coverage
+```
+
+## Linting & Formatting
+```bash
+./mvnw checkstyle:check     # Run Checkstyle
+./mvnw spotless:check       # Check formatting
+./mvnw spotless:apply       # Apply formatting
+```
+
+## Dependencies
+```bash
+./mvnw dependency:tree      # Show dependency tree
+./mvnw versions:display-dependency-updates  # Check updates
+```
+
+## Clean
+```bash
+./mvnw clean                # Clean target/
+./mvnw clean install        # Clean and rebuild
+```
+
+## Pre-commit
+```bash
+pre-commit install          # Install hooks
+pre-commit run -a           # Run all checks
+```
+
+## IDE Integration
+```bash
+./mvnw idea:idea            # Generate IntelliJ files
+./mvnw eclipse:eclipse      # Generate Eclipse files
+```

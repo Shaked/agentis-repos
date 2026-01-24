@@ -1,0 +1,16 @@
+# Cursor Rules - Monorepo Agent Context
+
+This is a monorepo. Read context files from the relevant subdirectory.
+
+## Root Context
+- `.agent/overview.md` — High-level architecture
+- `.agent/architecture.md` — System architecture and design decisions
+
+## Per-Project Context
+{{range .Results}}- `{{.Path}}/.agent/` — {{.Stack}} project context
+{{end}}
+
+## Navigation
+1. Check which project you're working in
+2. Read that project's `.agent/` files
+3. Follow project-specific conventions

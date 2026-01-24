@@ -1,0 +1,101 @@
+# Testing Standards
+
+## Framework
+- **JUnit 5** (JUnit 4 not allowed)
+- **AssertJ** for fluent assertions
+- **Mockito** for mocking
+
+## Test File Naming
+- Test classes: `*Test.java`
+- Located in `src/test/java/`
+- Mirror source package structure
+
+## Test Structure
+
+```java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.*;
+
+class UserServiceTest {
+
+    private UserService service;
+
+    @BeforeEach
+    void setUp() {
+        service = new UserService();
+    }
+
+    @Nested
+    @DisplayName("createUser")
+    class CreateUser {
+
+        @Test
+        @DisplayName("should create user with valid email")
+        void shouldCreateUserWithValidEmail() {
+            User user = service.createUser("alice@example.com");
+            assertThat(user.getEmail()).isEqualTo("alice@example.com");
+        }
+
+        @Test
+        @DisplayName("should throw on invalid email")
+        void shouldThrowOnInvalidEmail() {
+            assertThatThrownBy(() -> service.createUser("invalid"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Invalid email");
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "alice@example.com, true",
+        "bob@test.org, true",
+        "invalid, false"
+    })
+    @DisplayName("validateEmail should validate correctly")
+    void validateEmail(String email, boolean expected) {
+        assertThat(service.validateEmail(email)).isEqualTo(expected);
+    }
+}
+```
+
+## Mocking with Mockito
+
+```java
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+
+    @Mock
+    private UserRepository repository;
+
+    @Test
+    void shouldFindUser() {
+        when(repository.findById(1L)).thenReturn(Optional.of(new User()));
+        // test code
+        verify(repository).findById(1L);
+    }
+}
+```
+
+## Test Commands
+```bash
+./mvnw test                      # Run all tests
+./mvnw test -Dtest=UserServiceTest  # Run specific test
+./mvnw test -Dtest=*#methodName  # Run specific method
+./mvnw verify                    # Run integration tests
+```
+
+## Best Practices
+- Use `@DisplayName` for readable test names
+- Group related tests with `@Nested`
+- Use parameterized tests for multiple inputs
+- Mock external dependencies

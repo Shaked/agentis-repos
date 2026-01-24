@@ -1,0 +1,43 @@
+# CLI Commands Cheat Sheet
+
+## Environment Setup
+```bash
+uv sync                 # Install dependencies
+uv venv                 # Create virtual environment
+source .venv/bin/activate  # Activate (if needed)
+```
+
+## Testing
+```bash
+make test               # Run all tests
+uv run pytest -v        # Verbose
+uv run pytest -k "name" # Run specific test
+uv run pytest --cov     # With coverage
+```
+
+## Linting & Formatting
+```bash
+make lint               # Run linter
+make fmt                # Format code
+uv run ruff check --fix # Auto-fix issues
+```
+
+## Type Checking
+```bash
+make type-check         # Run type checker
+uv run ty check .       # Direct command
+```
+
+## Dependencies
+```bash
+uv add package          # Add dependency
+uv add --dev package    # Add dev dependency
+uv remove package       # Remove dependency
+uv lock                 # Update lock file
+```
+
+## Pre-commit
+```bash
+pre-commit install      # Install hooks
+pre-commit run -a       # Run all checks
+```

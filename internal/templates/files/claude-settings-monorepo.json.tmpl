@@ -1,0 +1,14 @@
+{
+  "context_files": [
+    ".agent/overview.md",
+    ".agent/architecture.md"{{range .Results}},
+    "{{.Path}}/.agent/stack.md"{{end}}
+  ],
+  "project_type": "monorepo",
+  "projects": [{{$first := true}}{{range .Results}}{{if not $first}},{{end}}{{$first = false}}
+    {
+      "path": "{{.Path}}",
+      "type": "{{.Stack}}"
+    }{{end}}
+  ]
+}

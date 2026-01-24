@@ -1,0 +1,78 @@
+# Code Review Rules
+
+> Code review requirements for Python projects.
+
+## Reviewer Skills Required
+
+- Understand Python idioms and PEP standards
+- Verify changes follow established conventions
+- Identify security vulnerabilities and anti-patterns
+- Assess test coverage and quality
+- Evaluate performance implications
+
+## Review Checklist
+
+### Universal Requirements
+
+- [ ] No secrets, credentials, or API keys committed
+- [ ] Error handling is present and appropriate
+- [ ] Tests cover the changes adequately
+- [ ] No commented-out code without explanation
+- [ ] No TODO/FIXME without associated tracking
+- [ ] Changes are backwards compatible (or breaking changes documented)
+
+### Python Style & Formatting
+
+- [ ] Code passes `ruff` or `flake8` linting
+- [ ] Code formatted with `black` or `ruff format`
+- [ ] Imports sorted with `isort` or `ruff`
+- [ ] Type hints on function signatures
+- [ ] Docstrings follow Google/NumPy style
+- [ ] Variable names are `snake_case`
+- [ ] Class names are `PascalCase`
+- [ ] Constants are `UPPER_SNAKE_CASE`
+
+### Python Security Patterns
+
+- [ ] No `eval()` or `exec()` with user input
+- [ ] SQL queries use parameterized statements
+- [ ] No pickle/marshal of untrusted data
+- [ ] File paths validated against traversal
+- [ ] Subprocess calls avoid shell=True
+- [ ] Dependencies pinned to known-good versions
+- [ ] No hardcoded secrets or credentials
+
+### Python Performance Considerations
+
+- [ ] List comprehensions over manual loops where clearer
+- [ ] Generators for large sequences
+- [ ] Avoid repeated attribute access in loops
+- [ ] Use `defaultdict` / `Counter` where appropriate
+- [ ] Async I/O for concurrent operations
+- [ ] No blocking calls in async context
+
+### Python Testing Requirements
+
+- [ ] Tests use `pytest` conventions
+- [ ] Fixtures for shared setup
+- [ ] Parametrized tests for multiple cases
+- [ ] Mocks scope limited to test
+- [ ] Exception handling tested
+- [ ] Edge cases covered (empty, None, boundary)
+
+### Python Architecture
+
+- [ ] Modules have single responsibility
+- [ ] No circular imports
+- [ ] Abstract base classes for interfaces
+- [ ] Dependency injection over global state
+- [ ] Context managers for resource management
+- [ ] Type aliases for complex types
+
+### Python Documentation
+
+- [ ] Module docstrings present
+- [ ] Public functions have docstrings
+- [ ] Complex logic has inline comments
+- [ ] README documents installation and usage
+- [ ] Type stubs for public APIs if applicable

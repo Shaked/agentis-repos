@@ -1,0 +1,69 @@
+# Testing Standards
+
+## Framework
+- **vitest** (preferred) or **jest**
+- Async/Await required (no callbacks)
+
+## Test File Naming
+- Test files: `*.test.ts` or `*.spec.ts`
+- Co-located with source or in `tests/` directory
+
+## Test Structure
+
+```typescript
+import { describe, it, expect, beforeEach } from 'vitest';
+import { UserService } from '../src/user-service';
+
+describe('UserService', () => {
+  let service: UserService;
+
+  beforeEach(() => {
+    service = new UserService();
+  });
+
+  describe('createUser', () => {
+    it('should create a user with valid email', async () => {
+      const user = await service.createUser('alice@example.com');
+      expect(user.email).toBe('alice@example.com');
+    });
+
+    it('should throw on invalid email', async () => {
+      await expect(service.createUser('invalid')).rejects.toThrow('Invalid email');
+    });
+  });
+
+  describe('validateEmail', () => {
+    it.each([
+      ['alice@example.com', true],
+      ['bob@test.org', true],
+      ['invalid', false],
+    ])('validates %s as %s', (email, expected) => {
+      expect(service.validateEmail(email)).toBe(expected);
+    });
+  });
+});
+```
+
+## Mocking
+
+```typescript
+import { vi, describe, it, expect } from 'vitest';
+
+vi.mock('../src/database', () => ({
+  query: vi.fn().mockResolvedValue([{ id: 1 }]),
+}));
+```
+
+## Test Commands
+```bash
+pnpm test              # Run all tests
+pnpm test:watch        # Watch mode
+pnpm test:coverage     # With coverage
+pnpm test -- -t "name" # Run specific test
+```
+
+## Best Practices
+- Use async/await, not callbacks
+- Mock external dependencies
+- Test edge cases and error paths
+- Keep tests focused and isolated

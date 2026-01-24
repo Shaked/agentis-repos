@@ -1,0 +1,21 @@
+.PHONY: test-all lint-all build-all clean-all
+
+# Run tests in all projects
+test-all:
+{{range .Results}}	$(MAKE) -C {{.Path}} test || true
+{{end}}
+
+# Lint all projects
+lint-all:
+{{range .Results}}	$(MAKE) -C {{.Path}} lint || true
+{{end}}
+
+# Build all projects
+build-all:
+{{range .Results}}	$(MAKE) -C {{.Path}} build || true
+{{end}}
+
+# Clean all projects
+clean-all:
+{{range .Results}}	$(MAKE) -C {{.Path}} clean || true
+{{end}}

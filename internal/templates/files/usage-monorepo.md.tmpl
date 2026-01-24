@@ -1,0 +1,26 @@
+# Monorepo Usage Guide
+
+## Projects
+{{range .Results}}
+### {{.Path}} ({{.Stack}})
+See `{{.Path}}/USAGE.md` for detailed instructions.
+{{end}}
+
+## Root Commands
+
+```bash
+# Run all tests
+make test-all
+
+# Lint all projects
+make lint-all
+
+# Build all projects
+make build-all
+```
+
+## Development Workflow
+
+1. Navigate to the specific project directory
+2. Follow the project-specific USAGE.md
+3. Use root Makefile for cross-project operations

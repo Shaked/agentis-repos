@@ -1,0 +1,42 @@
+# Agent Context Router
+
+> Monorepo with multiple services.
+
+## Development Workflow
+
+When making changes, follow this iterative loop:
+
+1. **Run pre-commit hooks**: `pre-commit run --all-files`
+2. **Run tests**: `make test` (runs tests across all projects)
+3. **Create todos** for any failures or issues found
+4. **Fix** issues one at a time
+5. **Repeat** steps 1-4 until all checks pass
+
+## Project Structure
+
+{{range .Results}}- `{{.Path}}` — {{.Stack}} project
+{{end}}
+
+## Context Files
+
+| File | Purpose | When to Read |
+|------|---------|--------------|
+| `CODE_REVIEW_RULES.md` | Code review requirements | Before submitting changes |
+| `repo-best-practices.md` | Team patterns & conventions | When writing new code |
+| `.agent/overview.md` | High-level architecture | Understanding the system |
+| `.agent/architecture.md` | System architecture | Understanding system design |
+{{if .HasLegacy}}| `.agent/AGENTS_LEGACY.md` | Historical context | If referenced elsewhere |
+{{end}}
+## Per-Project Context
+
+Each subdirectory has its own:
+- `AGENTS.md` — Project-specific router
+- `CODE_REVIEW_RULES.md` — Stack-specific review rules
+- `repo-best-practices.md` — Project-specific patterns
+- `.agent/stack.md` — Stack and versions
+- `.agent/testing.md` — Testing patterns
+- `.agent/commands.md` — CLI commands
+
+## Human Docs
+
+See `USAGE.md` for detailed usage instructions.
