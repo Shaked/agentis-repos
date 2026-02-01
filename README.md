@@ -1,54 +1,102 @@
-# agentic-repo
+# 🤖 agentic-repo
 
-A CLI tool that transforms standard Git repositories into **Hybrid Human/Agent Environments**, optimizing for AI context windows, reduced hallucinations, and strict code governance.
+**Transform any Git repository into a Hybrid Human/Agent Environment.**
 
-## The Problem
+Stop your AI assistant from hallucinating commands, wasting tokens on irrelevant files, or getting confused by inconsistent patterns.
 
-AI agents cannot efficiently ingest an entire repository's context without:
-- Wasting tokens on irrelevant files
-- Getting confused by inconsistent patterns
-- Hallucinating commands or configurations
+---
 
-## The Solution
+## 🤖 Agentic Installation
 
-**Context Routing** — The agent loads a lightweight "Router" file (`AGENTS.md`) first, which points to specific context files on demand.
+Tell your AI coding assistant:
 
-## Quick Start
+> Read https://raw.githubusercontent.com/Shaked/agentic-repo/main/INSTALL.md and install agentic-repo
+
+Or see [INSTALL.md](./INSTALL.md) for manual installation.
+
+---
+
+## ⚡ Quick Start
 
 ```bash
 # Install
 go install github.com/Shaked/agentic-repo/cmd/agentic-repo@latest
 
-# Initialize your repository
+# Initialize your repo
 cd your-project
 agentic-repo init
 
-# Preview what would be generated
+# Preview first (optional)
 agentic-repo init --dry-run
 ```
 
-## What Gets Generated
+---
+
+## 🎯 The Problem
+
+AI agents struggle with repositories because they:
+
+- 🔥 **Waste tokens** on irrelevant files
+- 😵 **Get confused** by inconsistent patterns
+- 🤷 **Hallucinate** commands and configurations
+
+## 💡 The Solution
+
+**Context Routing** — Your agent loads a lightweight router file (`AGENTS.md`) first, then pulls specific context on-demand.
+
+```
+Agent reads AGENTS.md (< 100 tokens)
+         ↓
+    Needs to run tests?  →  Load .agent/testing.md
+    Needs CLI commands?  →  Load .agent/commands.md
+    Doing code review?   →  Load CODE_REVIEW_RULES.md
+```
+
+No more token waste. No more guessing.
+
+---
+
+## 📁 What Gets Generated
 
 ```
 your-project/
-├── AGENTS.md                 # Router + workflow (<100 tokens)
-├── CODE_REVIEW_RULES.md      # CI code review requirements
-├── repo-best-practices.md    # Team patterns (editable)
-├── USAGE.md                  # Human-readable guide
-├── Makefile                  # Standard targets
-├── .agentignore              # Files to skip
-├── .pre-commit-config.yaml   # Enforcement hooks
+├── AGENTS.md                 # 🗺️  Router (< 100 tokens)
+├── CODE_REVIEW_RULES.md      # ✅ CI review requirements
+├── repo-best-practices.md    # 📚 Team patterns
+├── USAGE.md                  # 👤 Human-readable guide
+├── Makefile                  # 🔧 Standard targets
+├── .agentignore              # 🚫 Files to skip
+├── .pre-commit-config.yaml   # 🔒 Enforcement hooks
 ├── .agent/
-│   ├── stack.md              # Tech stack & versions
-│   ├── testing.md            # Testing patterns
-│   ├── commands.md           # CLI cheat sheet
-│   └── AGENTS_LEGACY.md      # Migrated original (if existed)
+│   ├── stack.md              # 🛠️  Tech stack & versions
+│   ├── testing.md            # 🧪 Testing patterns
+│   └── commands.md           # 💻 CLI cheat sheet
 ├── .cursorrules              # Cursor AI integration
 └── .claude/
     └── settings.json         # Claude integration
 ```
 
-## Supported Stacks
+---
+
+## 🔄 The Agent Workflow
+
+Agents follow an iterative loop that ensures quality:
+
+```
+Make Changes → Run pre-commit → Run tests
+                                    ↓
+                              Passing?
+                             /        \
+                           No          Yes
+                           ↓            ↓
+                    Fix issues    Ready for review
+                         ↓              ↓
+                    (loop back)        CI
+```
+
+---
+
+## 🧩 Supported Stacks
 
 | Language | Package Manager | Linter | Formatter | Testing |
 |----------|----------------|--------|-----------|---------|
@@ -57,9 +105,11 @@ your-project/
 | **Node/TS** | pnpm | eslint | prettier | vitest |
 | **Java** | Maven | Checkstyle | Spotless | JUnit 5 |
 
-## Monorepo Support
+---
 
-The tool auto-detects monorepos and creates hierarchical context:
+## 📦 Monorepo Support
+
+Auto-detects monorepos and creates hierarchical context:
 
 ```
 monorepo/
@@ -75,35 +125,9 @@ monorepo/
     └── .agent/
 ```
 
-## The Agent Workflow
+---
 
-Agents follow an iterative development loop that ensures quality and self-correction:
-
-```mermaid
-flowchart LR
-    A[Make Changes] --> B[Run pre-commit]
-    B --> C[Run tests]
-    C --> D{Passing?}
-    D -->|No| E[Create todos]
-    E --> F[Fix issues]
-    F --> B
-    D -->|Yes| G[Ready for review]
-    G --> H[CI]
-    H --> I[CODE_REVIEW_RULES validates]
-```
-
-### Context Loading
-
-1. **Agent reads `AGENTS.md`** — Gets the map and workflow instructions
-2. **Agent loads context on demand:**
-   - Bug fix? → `.agent/stack.md`
-   - Write test? → `.agent/testing.md`
-   - Run something? → `.agent/commands.md`
-   - Code review? → `CODE_REVIEW_RULES.md`
-3. **Agent executes with exact commands** — No guessing
-4. **Pre-commit hooks validate** — Agent self-corrects via the workflow loop
-
-## CLI Flags
+## 🚀 CLI Options
 
 | Flag | Description |
 |------|-------------|
@@ -111,19 +135,18 @@ flowchart LR
 | `--force`, `-f` | Overwrite existing files |
 | `--verbose`, `-v` | Show detailed output |
 
-## Development
+---
+
+## 🛠️ Development
 
 ```bash
-# Build
-make build
-
-# Test
-make test
-
-# Lint
-make lint
+make build    # Build binary
+make test     # Run tests
+make lint     # Run linter
 ```
 
-## License
+---
+
+## 📄 License
 
 Apache 2.0
