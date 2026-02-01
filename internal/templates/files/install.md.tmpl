@@ -1,0 +1,86 @@
+# Installing <PROJECT_NAME>
+
+## 🤖 Agentic Installation
+
+Tell your AI coding assistant:
+
+> Read https://raw.githubusercontent.com/<OWNER>/<REPO>/main/INSTALL.md and set up <PROJECT_NAME>
+
+---
+
+## Prerequisites
+
+{{if eq .Stack.String "go"}}- Go 1.22+ (`go version`)
+- golangci-lint (optional, for linting)
+{{else if eq .Stack.String "python"}}- Python 3.11+ (`python --version`)
+- uv (`uv --version`) or pip
+{{else if eq .Stack.String "node"}}- Node.js 20+ (`node --version`)
+- pnpm (`pnpm --version`)
+{{else if eq .Stack.String "java"}}- Java 17+ (`java --version`)
+- Maven 3.9+ (`mvn --version`) or use included wrapper
+{{else}}- <LIST_YOUR_PREREQUISITES_HERE>
+{{end}}
+---
+
+## Install
+
+{{if eq .Stack.String "go"}}```bash
+git clone https://github.com/<OWNER>/<REPO>.git
+cd <REPO>
+make build
+```
+{{else if eq .Stack.String "python"}}```bash
+git clone https://github.com/<OWNER>/<REPO>.git
+cd <REPO>
+uv sync
+```
+{{else if eq .Stack.String "node"}}```bash
+git clone https://github.com/<OWNER>/<REPO>.git
+cd <REPO>
+pnpm install
+```
+{{else if eq .Stack.String "java"}}```bash
+git clone https://github.com/<OWNER>/<REPO>.git
+cd <REPO>
+./mvnw package
+```
+{{else}}```bash
+git clone https://github.com/<OWNER>/<REPO>.git
+cd <REPO>
+# <ADD_YOUR_INSTALL_COMMANDS_HERE>
+```
+{{end}}
+---
+
+## Verify
+
+{{if eq .Stack.String "go"}}```bash
+make test
+```
+{{else if eq .Stack.String "python"}}```bash
+make test
+# or: uv run pytest
+```
+{{else if eq .Stack.String "node"}}```bash
+pnpm test
+```
+{{else if eq .Stack.String "java"}}```bash
+./mvnw test
+```
+{{else}}```bash
+# <ADD_YOUR_VERIFICATION_COMMAND_HERE>
+```
+{{end}}
+Expected: All tests pass.
+
+---
+
+## Troubleshooting
+
+### <COMMON_ISSUE_1>
+
+<DESCRIPTION_AND_SOLUTION>
+
+### <COMMON_ISSUE_2>
+
+<DESCRIPTION_AND_SOLUTION>

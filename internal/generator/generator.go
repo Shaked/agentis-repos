@@ -74,6 +74,7 @@ func (g *Generator) generateSingleProject(root string, stack detector.StackType)
 		{".agent/architecture.md", "architecture.md.tmpl", data},
 		{".cursorrules", "cursorrules.tmpl", data},
 		{".claude/settings.json", "claude-settings.json.tmpl", data},
+		{"INSTALL.md", "install.md.tmpl", data},
 	}
 
 	for _, f := range files {
@@ -114,6 +115,7 @@ func (g *Generator) generateMonorepo(root string, results []detector.Result) err
 		{".agent/architecture.md", "architecture.md.tmpl", monoData},
 		{".cursorrules", "cursorrules-monorepo.tmpl", monoData},
 		{".claude/settings.json", "claude-settings-monorepo.json.tmpl", monoData},
+		{"INSTALL.md", "install.md.tmpl", templateData{Stack: detector.StackUnknown}},
 	}
 
 	for _, f := range rootFiles {
